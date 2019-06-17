@@ -41,7 +41,12 @@ class Block {
             // Save in auxiliary variable the current block hash
             let currentHash = self.hash;
             // Recalculate the hash of the Block
-            let hashOfTheCurrentObject = SHA256(JSON.stringify(self.body)).toString();
+            let blockCopied = new Block(null);
+            blockCopied.body = self.body;
+            blockCopied.height = self.height;
+            blockCopied.time = self.time;
+            blockCopied.previousBlockHash = self.previousBlockHash;
+            let hashOfTheCurrentObject = SHA256(JSON.stringify(blockCopied)).toString();
             // Comparing if the hashes changed
             if (currentHash != hashOfTheCurrentObject) {
                 // Returning the Block is not valid

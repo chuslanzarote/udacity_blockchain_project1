@@ -71,8 +71,8 @@ class Blockchain {
                     block.previousBlockHash = this.chain[this.chain.length-1].hash;
                 }
                 block.time = new Date().getTime().toString().slice(0, -3);
-                block.hash = SHA256(JSON.stringify(block.body)).toString();
                 self.height = block.height;
+                block.hash = SHA256(JSON.stringify(block)).toString();
                 self.chain.push(block);
            }
            catch (e)
@@ -195,7 +195,7 @@ class Blockchain {
         return new Promise((resolve, reject) => {
             self.chain.forEach((block)=>{
                 block.getBData().then(star =>{
-                    if(star.address == address){
+                    if(star && star.address == address){
                         stars.push(star);
                     }
                 });
