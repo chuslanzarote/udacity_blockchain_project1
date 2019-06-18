@@ -217,9 +217,6 @@ class Blockchain {
         let previousBlockHash;
         return new Promise(async (resolve, reject) => {
             this.chain.forEach((block)=>{
-                if(block.height == 0){
-                    block.hash += 'chus';
-                }
                 block.validate().then((validated)=>{
                     if(!validated){
                         errorLog.push("The block with height " + block.height + " failed its validation");

@@ -11,6 +11,7 @@
 
 const SHA256 = require('crypto-js/sha256');
 const hex2ascii = require('hex2ascii');
+const utf8 = require('utf8');
 
 class Block {
 
@@ -78,7 +79,7 @@ class Block {
 
             // Resolve with the data if the object isn't the Genesis block
             if (this.height > 0) {
-                let currentData = JSON.parse(hex2ascii(this.body));
+                let currentData = JSON.parse(utf8.decode(hex2ascii(this.body)));
 
                 resolve(currentData);
             } else {
